@@ -12,12 +12,12 @@ jobs:
 
     steps:
       - name: Check out Git repository # clone the repo to local ci workspace
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up our JDK environment # setup JDK environment: mandatory as we need to build  android project
         uses: actions/setup-java@v3
         with:
-          java-version: 18.0.1.1
+          java-version: '17'
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
@@ -56,15 +56,15 @@ jobs:
           cd android && ./gradlew assembleRelease --no-daemon
 
       ## sign generated apk
-      # - name: Sign APK
-      #   id: sign_app
-      #   uses: r0adkll/sign-android-release@v1
-      #   with:
-      #     releaseDirectory: android/app/build/outputs/apk/release
-      #     signingKeyBase64: ${{ secrets.ANDROID_SIGNING_KEY }}
-      #     alias: ${{ secrets.ANDROID_ALIAS }}
-      #     keyStorePassword: ${{ secrets.ANDROID_KEY_STORE_PASSWORD }}
-      #     keyPassword: ${{ secrets.ANDROID_KEY_PASSWORD }}
+      - name: Sign APK
+        id: sign_app
+        uses: r0adkll/sign-android-release@v1
+        with:
+          releaseDirectory: android/app/build/outputs/apk/release
+          signingKeyBase64: ${{ secrets.ANDROID_SIGNING_KEY }}
+          alias: ${{ secrets.ANDROID_ALIAS }}
+          keyStorePassword: ${{ secrets.ANDROID_KEY_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.ANDROID_KEY_PASSWORD }}
 
       # ## Distribute app to Firebase App Distribution for testing / use google play internal track if you have a google play account
       # - name: upload artifact to Firebase App Distribution
