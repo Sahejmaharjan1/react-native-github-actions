@@ -65,7 +65,7 @@ jobs:
         with:
           name: mydebugapkartifacts
           # a file, directory or wildcards pattern that describes what to upload.
-          path: android/app/build/outputs/apk/debug
+          path: android/app/build/outputs/apk/release/app-release.apk
           if-no-files-found: error
           retention-days: 2
 
