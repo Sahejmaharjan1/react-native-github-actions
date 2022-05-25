@@ -60,6 +60,15 @@ jobs:
         run: |
           cd android && ./gradlew assembleRelease --no-daemon
 
+      - name: Upload apk
+        uses: actions/upload-artifact@v3
+        with:
+          name: mydebugapkartifacts
+          # a file, directory or wildcards pattern that describes what to upload.
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
+          retention-days: 2
+
       ## sign generated apk
       # - name: Sign APK
       #   id: sign_app
