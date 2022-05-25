@@ -40,9 +40,10 @@ public class MainActivity extends ReactActivity {
       return reactRootView;
     }
   }
-}
-  // necessary for navigaiton reference https://reactnavigation.org/docs/getting-started/
+
+    // necessary for navigaiton reference https://reactnavigation.org/docs/getting-started/
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(null);
   }
+}
