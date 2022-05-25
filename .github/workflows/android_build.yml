@@ -52,9 +52,9 @@ jobs:
       - name: Make Gradlew Executable
         run: cd android && chmod +x ./gradlew
 
-      - name: Create assets dir and create bundle file
-        run: |
-          npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res
+      # - name: Create assets dir and create bundle file
+      #   run: |
+      #     npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res
 
       - name: Generate App APK
         run: |
