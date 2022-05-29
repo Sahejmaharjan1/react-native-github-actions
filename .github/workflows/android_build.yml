@@ -70,13 +70,13 @@ jobs:
 
       # Generate App APK for dev
       - name: Generate App APK For Dev
-        if: ${{ steps.extract_branch.outputs.branch }} == 'dev'
+        if: steps.extract_branch.outputs.branch == 'dev'
         run: |
           cd android && ./gradlew assembleRelease --no-daemon
 
       # Generate App APK for staging
       - name: Generate App APK For Staging
-        if: ${{ steps.extract_branch.outputs.branch }} == 'staging'
+        if: steps.extract_branch.outputs.branch == 'staging'
         run: |
           cd android && ./gradlew assembleRelease --no-daemon
 
