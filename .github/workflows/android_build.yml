@@ -59,7 +59,18 @@ jobs:
       #   run: |
       #     npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res
 
+      # extract the branch name
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
+
+      - name: Echo the value of branch
+        run: echo "${{ steps.extract_branch.outputs.branch }}"
+
+      # to get the branch name from above ${{ steps.extract_branch.outputs.branch }}
       - name: Generate App APK
+        if: ${{ steps.extract_branch.outputs.branch }} == 'dev'
         run: |
           cd android && ./gradlew assembleRelease --no-daemon
 
