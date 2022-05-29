@@ -68,9 +68,15 @@ jobs:
       - name: Echo the value of branch
         run: echo "${{ steps.extract_branch.outputs.branch }}"
 
-      # to get the branch name from above ${{ steps.extract_branch.outputs.branch }}
-      - name: Generate App APK
+      # Generate App APK for dev
+      - name: Generate App APK For Dev
         if: ${{ steps.extract_branch.outputs.branch }} == 'dev'
+        run: |
+          cd android && ./gradlew assembleRelease --no-daemon
+
+      # Generate App APK for staging
+      - name: Generate App APK For Staging
+        if: ${{ steps.extract_branch.outputs.branch }} == 'staging'
         run: |
           cd android && ./gradlew assembleRelease --no-daemon
 
